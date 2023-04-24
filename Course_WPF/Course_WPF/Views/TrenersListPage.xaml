@@ -1,0 +1,58 @@
+﻿<Page x:Class="Course_WPF.Views.TrenersListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Course_WPF.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="340" d:DesignWidth="800"
+      Title="TrenersListPage">
+
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Штат тренеров" FontSize="30" Background="#FFF5AC77" Foreground="White"/>
+        <Button Content="Удалить тренера" Width="150" FontSize="17" Background="#FFF5AC99" HorizontalAlignment="Right" Foreground="White" Height="40" Command="{Binding Delete_Trener}" Margin="0,10,50,10"/>
+        <Button Content="Редактировать" Width="135" FontSize="17" Background="#FFF5AC99" HorizontalAlignment="Left" Foreground="White" Height="40" Command="{Binding Edit_Trener}" Margin="448,10,0,10"/>
+        <ListBox Grid.Row="1" Background="Lavender" SelectionMode="Single" SelectedItem="{Binding SelectedTrener}" ItemsSource="{Binding Treners}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Width="81" Height="112" Grid.RowSpan="2" Source="{Binding TraningNavigation.PhotoTrener}"/>
+
+                        <TextBlock Grid.Column="1" Width="130" Text="ФИО" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"></TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding TrenerName}" Width="250" VerticalAlignment="Top" FontSize="15" Height="30" />
+
+                        <TextBlock Grid.Column="2" Width="130" Text="Спецификация" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"></TextBlock>
+                        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding TrenerType}" Width="130" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"/>
+
+                        <TextBlock Grid.Column="3" Width="130" Text="Описание" VerticalAlignment="Top"  FontSize="15" Margin="15 0 0 0" Height="30"></TextBlock>
+                        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding TrenerDescription}" Width="130" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"/>
+
+                        <TextBlock Grid.Column="4" Width="130" Text="Зарплата" VerticalAlignment="Top"  FontSize="15" Margin="15 0 0 0" Height="30"></TextBlock>
+                        <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding TrenerSalary}" Width="130" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+    </Grid>
+</Page>
