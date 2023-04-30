@@ -48,10 +48,10 @@ namespace CourseWork_Server.Controllers
 
         // PUT: api/Clients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("UpdateClient")]
-        public async Task<IActionResult> PutClient(int id, Client client)
+        [HttpPost("UpdateClient")]
+        public async Task<IActionResult> PutClient(Client client)
         {
-            if (id != client.Id)
+            if ( client.Id != null )
             {
                 return BadRequest();
             }
@@ -64,7 +64,7 @@ namespace CourseWork_Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClientExists(id))
+                if (!ClientExists(client.Id))
                 {
                     return NotFound();
                 }
@@ -74,7 +74,7 @@ namespace CourseWork_Server.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Clientsa
@@ -104,7 +104,7 @@ namespace CourseWork_Server.Controllers
 
         // DELETE: api/Clients/5
         [HttpPost("DeleteClient")]
-        public async Task<IActionResult> DeleteClient(int id)
+        public async Task<IActionResult> DeleteClient([FromBody]int id)
         {
             if (_context.Clients == null)
             {

@@ -83,17 +83,24 @@ namespace CourseWork_Server.Controllers
         [HttpPost("Create_Trener")]
         public async Task<ActionResult<Trener>> PostTrener([FromBody]Trener trener)
         {
-            if (_context.Treners == null)
+            try
             {
-                return NotFound();
+                if (_context.Treners == null)
+                {
+                    return NotFound();
+                }
+                _context.Treners.Add(trener);
+                _context.SaveChanges();
+                if (trener == null)
+                {
+                    return NotFound();
+                }
             }
-            _context.Treners.Add(trener);
-            _context.SaveChanges(); 
-            if (trener == null)
+            catch(DbUpdateConcurrencyException ex)
             {
-                return NotFound();
+                return Ok(ex);
             }
-            return trener;
+            return Ok();    
             //return CreatedAtAction("CreateTrener", new { id = trener.Id, trenerName = trener.TrenerName, trenerType = trener.TrenerType, trenerDescription = trener.TrenerDescription, trenerLogin = trener.TrenerLogin, trenerPassword = trener.TrenerPassword }, trener);
         }
 

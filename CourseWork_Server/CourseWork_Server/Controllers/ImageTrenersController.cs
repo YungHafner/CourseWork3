@@ -28,23 +28,29 @@ namespace CourseWork_Server.Controllers
 
         // GET: api/ImageTreners/5
         [HttpPost("GetImageTrener")]
-        public async Task<ActionResult<ImageTrener>> GetImageTrener(ImageTrener imgTrener)
+        public async Task<ActionResult<ImageTrener>> GetImageTrener(int id)
         {
-            if (_context.ImageTreners == null)
+            try
             {
-                return NotFound();
-            }
-            //var s = await _context.ImageTreners.Where(imgTrener.Id == trener.Id)
-            var imageTrener = await _context.ImageTreners.FindAsync(imgTrener.Id);
+                if (_context.ImageTreners == null)
+                {
+                    return NotFound();
+                }
+                //var s = await _context.ImageTreners.Where(imgTrener.Id == trener.Id)
+                var imageTrener = await _context.ImageTreners.FindAsync(id);
 
-            if (imageTrener == null)
+                if (imageTrener == null)
+                {
+                    return NotFound();
+                }
+
+                return imageTrener;
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                return Ok(ex);
             }
-
-            return imageTrener;
         }
-
         // PUT: api/ImageTreners/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -61,16 +67,9 @@ namespace CourseWork_Server.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
-                if (!ImageTrenerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return Ok(ex);
             }
 
             return NoContent();
@@ -81,17 +80,23 @@ namespace CourseWork_Server.Controllers
         [HttpPost("EditPhotoForTrener")]
         public async Task<ActionResult<ImageTrener>> PostImageTrener(ImageTrener imageTrener)
         {
-            if (_context.ImageTreners == null)
-            {
-                return NotFound();
+            try
+                { 
+                if (_context.ImageTreners == null)
+                {
+                    return NotFound();
+                }
+                _context.ImageTreners.Add(imageTrener);
+                await _context.SaveChangesAsync();
+                if(imageTrener == null)
+                {
+                    return NotFound();
+                }
             }
-            _context.ImageTreners.Add(imageTrener);
-            await _context.SaveChangesAsync();
-            if(imageTrener == null)
+            catch(DbUpdateException ex)
             {
-                return NotFound();
+                return Ok(ex.Message);
             }
-
             return imageTrener;
             //return CreatedAtAction("GetImageTrener", new { id = imageTrener.Id }, imageTrener);
         }

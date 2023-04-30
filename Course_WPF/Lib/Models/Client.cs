@@ -19,7 +19,7 @@ namespace Course_Lib.Models
         public string? PhoneNumber { get; set; }
         public int? PassportSeria { get; set; }
         public int? PassportNumber { get; set; }
-        public int? ImageClientId { get; set; }
+        public int ImageClientId { get; set; }
         public byte? Vipclient { get; set; }
 
         public virtual ImageClient? ImageClient { get; set; }

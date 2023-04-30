@@ -12,7 +12,6 @@ namespace Course_WPF.ViewModels
         private CustomCommand selectPhoto;
 
         private byte[] image;
-        private ImageTrener imgTrener1;
 
         public string Trener_name { get; set; }
         public string Trener_type { get; set; }
@@ -20,7 +19,7 @@ namespace Course_WPF.ViewModels
         public int Trener_salary { get; set; }
         public string Trener_login { get; set; }
         public string Trener_password { get; set; }
-        public byte[] Image { get => image; set { image = value; Signal(); } }
+        public byte[] Image { get => image; set { image = value; Signal(); } }  
 
         public CustomCommand Registration_Trener { get; set; }
         public CustomCommand SelectPhoto { get => selectPhoto; set => selectPhoto = value; }
@@ -41,8 +40,8 @@ namespace Course_WPF.ViewModels
 
             Registration_Trener = new CustomCommand(async () =>
             {
-                var json2 = await HttpTool.PostAsyncs("ImageTreners", new ImageTrener { PhotoTrener = Image }, "EditPhotoForTrener");
-                var img_Trener = HttpTool.Deserialize<ImageTrener>(json2.Item2);
+                    var json2 = await HttpTool.PostAsyncs("ImageTreners", new ImageTrener { PhotoTrener = Image }, "EditPhotoForTrener");
+                    var img_Trener = HttpTool.Deserialize<ImageTrener>(json2.Item2);
 
                 var json = await HttpTool.PostAsyncs("Treners", new Trener { TrenerName = Trener_name, 
                         TrenerType = Trener_type, TrenerDescription = Trener_description, 

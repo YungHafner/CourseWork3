@@ -1,5 +1,6 @@
 ﻿using Course_Lib.Models;
 using Course_WPF.Tools;
+using Course_WPF.Views;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -9,30 +10,24 @@ namespace Course_WPF.ViewModels
 {
     public class EditClientPageVM : BaseVM
     {
-        private byte[] image;
         private Client client;
+        private ImageClient imageClient;
+        private byte[] photoClient;
 
+        public ImageClient ImageClient { get => imageClient; set { imageClient = value; Signal(); } }
         public Client Client { get => client; set { client = value; Signal(); } }
-        public string Family { get; set; }
-        public string Name { get; set; }
-        public string Lastname { get; set; }
-        public string Adress { get; set; }
-        public string PhoneNumber { get; set; }
-        public string PassportSeria { get; set; }
-        public string PassportNumber { get; set; }
-        public DateTime Birthday { get; set; } 
-        public byte Vipclient { get; set; } = 0;
-        public byte[] Image { get => image; set { image = value; Signal(); } }
 
         public CustomCommand Edit_Client { get; set; }
         public CustomCommand SelectedPhoto { get; set; }
 
-        public EditClientPageVM(int id)
+        public byte[] PhotoClient { get => photoClient; set { photoClient = value; Signal(); } }
+
+        public EditClientPageVM(Client client)
         {
             Task.Run(async () =>
             {
-                var json = await HttpTool.PostAsyncs("Clients", id , "GetClient");
-                Client = HttpTool.Deserialize<Client>(json.Item2);
+                Client = client;
+
             });
 
             SelectedPhoto = new CustomCommand(async () =>
@@ -41,23 +36,32 @@ namespace Course_WPF.ViewModels
                 if (ofd.ShowDialog() == true)
                 {
                     var bytes = File.ReadAllBytes(ofd.FileName);
-                    Image = bytes;
+                    PhotoClient = bytes;
 
                 }
             });
 
             Edit_Client = new CustomCommand(async () =>
             {
-                var json2 = await HttpTool.PostAsyncs("ImageCliens", Image , "EditPhoto");
-                var json = await HttpTool.PostAsyncs("Clients", new Client { Name= Client.Name, 
-                    Family = Client.Family, Lastname = Client.Lastname,
+                if (client.ImageClientId != 0)
+                {
+                    var json2 = await HttpTool.PostAsyncs("ImageCliens", new ImageClient { Id = client.ImageClientId, PhotoClient = PhotoClient }, "EditPhoto");
+                }
+                var json = await HttpTool.PostAsyncs("Clients", new Client
+                {
+                    Id = client.Id,
+                    Name = Client.Name,
+                    Family = Client.Family,
+                    Lastname = Client.Lastname,
                     Birthday = Client.Birthday,
                     Adress = Client.Adress,
                     PhoneNumber = Client.PhoneNumber,
                     PassportSeria = Client.PassportSeria,
-                    PassportNumber= Client.PassportNumber,
-                    Vipclient= Client.Vipclient,
+                    PassportNumber = Client.PassportNumber,
+                    Vipclient = Client.Vipclient,
                 }, "UpdateClient");
+
+                Navigation.Instance.CurrentPage = new ClientsListPage();
             });
         }
     }

@@ -16,7 +16,7 @@ namespace CourseWork_Server.Controllers
         }
 
         // GET: api/ImageClients
-        [HttpGet]
+        [HttpPost("GetAllImages")]
         public async Task<ActionResult<IEnumerable<ImageClient>>> GetImageClients()
         {
             if (_context.ImageClients == null)
@@ -30,39 +30,36 @@ namespace CourseWork_Server.Controllers
         [HttpPost("Get_Client")]
         public async Task<ActionResult<ImageClient>> GetImageClient(int id)
         {
-            if (_context.ImageClients == null)
-            {
-                return NotFound();
-            }
-            var imageClient = await _context.ImageClients.FindAsync(id);
-
-            if (imageClient == null)
-            {
-                return NotFound();
-            }
-
-            return imageClient;
-        }
-
-        [HttpPut("EditPhoto")]
-        public async Task<IActionResult> PutImageClient(int id, ImageClient imageClient)
-        {
-            if (id != imageClient.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(imageClient).State = EntityState.Modified;
-
+            ImageClient imageClient;
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ImageClientExists(id))
+                if (_context.ImageClients == null)
                 {
                     return NotFound();
+                }
+                imageClient = await _context.ImageClients.FindAsync(id);
+            }
+            catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+
+            return Ok(imageClient);
+        }
+
+        [HttpPost("EditPhoto")]
+        public async Task<ActionResult<ImageClient>> PutImageClient(ImageClient imageClient)
+        {
+            try
+            {
+                _context.Entry(imageClient).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                if (!ImageClientExists(imageClient.Id))
+                {
+                    return NotFound(ex.Message);
                 }
                 else
                 {
@@ -70,7 +67,7 @@ namespace CourseWork_Server.Controllers
                 }
             }
 
-            return NoContent();
+            return imageClient;
         }
 
         [HttpPost("CreateImage_Client")]

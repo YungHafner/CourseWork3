@@ -9,10 +9,10 @@ namespace Course_WPF.Views
     /// </summary>
     public partial class EditTrenerPage : Page
     {
-        public EditTrenerPage(Trener trener)
+        public EditTrenerPage(Trener trener, ImageTrener img_trener)
         {
             InitializeComponent();
-            DataContext = new EditTrenerPageVM(trener);
+            DataContext = new EditTrenerPageVM(trener, img_trener);
         }
     }
 }

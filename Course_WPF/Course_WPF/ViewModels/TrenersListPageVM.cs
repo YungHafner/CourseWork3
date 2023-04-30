@@ -34,10 +34,10 @@ namespace Course_WPF.ViewModels
             {
                 if(SelectedTrener != null)
                 {
-                    var json = await HttpTool.PostAsyncs("Treners", SelectedTrener.Id , "GetTrener");
-                    var trener = HttpTool.Deserialize<Trener>(json.Item2);
+                    var json = await HttpTool.PostAsyncs("ImageTreners", SelectedTrener.ImageTrenerId , "GetImageTrener");
+                    var img_trener = HttpTool.Deserialize<ImageTrener>(json.Item2);
 
-                    Navigation.Instance.CurrentPage = new EditTrenerPage(trener);
+                    Navigation.Instance.CurrentPage = new EditTrenerPage(SelectedTrener, img_trener);
                 }
             });
 
@@ -65,8 +65,7 @@ namespace Course_WPF.ViewModels
 
             Task.Run(async () =>
             {
-                var json = await HttpTool.PostAsyncs("Treners", null , "GetAllTrenersWithImages");
-                Treners = HttpTool.Deserialize<List<Trener>>(json.Item2);
+                UpdateList();
             });
         }
 

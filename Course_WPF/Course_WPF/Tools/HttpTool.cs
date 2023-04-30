@@ -18,6 +18,7 @@ namespace Course_WPF.Tools
         static string host = "https://localhost:7077/api/";
         public static async Task<(HttpStatusCode, string)> PostAsyncs(string controller, object body, string method = null)
         {
+
             string url = host + controller;
             if (!string.IsNullOrEmpty(method))
                 url += "/" + method;
