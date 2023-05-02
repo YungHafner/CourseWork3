@@ -27,7 +27,7 @@ namespace CourseWork_Server.Controllers
         }
 
         // GET: api/ImageClients/5
-        [HttpPost("Get_Client")]
+        [HttpPost("Get_Client/{id}")]
         public async Task<ActionResult<ImageClient>> GetImageClient(int id)
         {
             ImageClient imageClient;

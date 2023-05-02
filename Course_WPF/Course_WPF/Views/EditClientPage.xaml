@@ -32,7 +32,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.ColumnSpan="2" Text="Обновление данных клиента" FontSize="30" Background="#FF68C398" Foreground="White"/>
-        <Image Source="{Binding PhotoClient, Mode=TwoWay}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="13" Margin="60,10,60,10" Width="150" Height="225"/>
+        <Image Source="{Binding PhotoClient, NotifyOnSourceUpdated=True}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="13" Margin="60,10,60,10" Width="150" Height="225"/>
 
         <TextBlock Grid.Column="1" Grid.Row="1" Text="Фамилия" FontSize="15" VerticalAlignment="Bottom"/>
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Имя" FontSize="15" VerticalAlignment="Bottom"/>

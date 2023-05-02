@@ -6,10 +6,10 @@ namespace Course_WPF.Views
 {
     public partial class EditClientPage : Page
     {
-        public EditClientPage(Client client)
+        public EditClientPage(Client client, ImageClient imageClient)
         {
             InitializeComponent();
-            DataContext = new EditClientPageVM(client);
+            DataContext = new EditClientPageVM(client, imageClient);
         }
 
         

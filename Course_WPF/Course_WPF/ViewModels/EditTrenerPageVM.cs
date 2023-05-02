@@ -21,11 +21,10 @@ namespace Course_WPF.ViewModels
 
         public EditTrenerPageVM(Trener trener, ImageTrener img_trener)
         {
-
             Task.Run(async () =>
             {
                 Trener = trener;
-                var json = await HttpTool.PostAsyncs("ImageTreners", Trener.ImageTrenerId, "GetImageTrener");
+                //var json = await HttpTool.PostAsyncs("ImageTreners", null, $"GetTrenersImage/{Trener.ImageTrenerId}");
                 Image = img_trener.PhotoTrener;
             });
 

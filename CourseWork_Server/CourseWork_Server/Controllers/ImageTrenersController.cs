@@ -27,16 +27,15 @@ namespace CourseWork_Server.Controllers
         }
 
         // GET: api/ImageTreners/5
-        [HttpPost("GetImageTrener")]
+        [HttpPost("GetTrenersImage/{id}")]
         public async Task<ActionResult<ImageTrener>> GetImageTrener(int id)
         {
-            try
+            if (id != 0)
             {
                 if (_context.ImageTreners == null)
                 {
                     return NotFound();
                 }
-                //var s = await _context.ImageTreners.Where(imgTrener.Id == trener.Id)
                 var imageTrener = await _context.ImageTreners.FindAsync(id);
 
                 if (imageTrener == null)
@@ -44,11 +43,11 @@ namespace CourseWork_Server.Controllers
                     return NotFound();
                 }
 
-                return imageTrener;
+                return Ok(imageTrener);
             }
-            catch (Exception ex)
+            else
             {
-                return Ok(ex);
+                return BadRequest();
             }
         }
         // PUT: api/ImageTreners/5

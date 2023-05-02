@@ -30,7 +30,7 @@
 
         <TextBlock Grid.ColumnSpan="3" Text="Изменение данных тренера" FontWeight="Bold" FontSize="30" Background="#FFF5AC77" Foreground="White"/>
 
-        <Image Source="{Binding Path=Image, Mode=TwoWay}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="8" Margin="25,18,20,10"/>
+        <Image Source="{Binding Path=Image, NotifyOnSourceUpdated=True}"  Grid.Column="0" Grid.Row="1" Grid.RowSpan="8" Margin="25,18,20,10"/>
 
         <TextBlock Grid.Column="1" Grid.Row="1" Text="ФИО" FontSize="20" VerticalAlignment="Bottom"/>
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Тип" FontSize="20" VerticalAlignment="Bottom"/>

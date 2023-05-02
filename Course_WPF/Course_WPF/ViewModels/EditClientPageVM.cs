@@ -22,12 +22,12 @@ namespace Course_WPF.ViewModels
 
         public byte[] PhotoClient { get => photoClient; set { photoClient = value; Signal(); } }
 
-        public EditClientPageVM(Client client)
+        public EditClientPageVM(Client client, ImageClient imageClient)
         {
             Task.Run(async () =>
             {
                 Client = client;
-
+                PhotoClient = imageClient.PhotoClient;
             });
 
             SelectedPhoto = new CustomCommand(async () =>

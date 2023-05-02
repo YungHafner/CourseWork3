@@ -34,8 +34,9 @@ namespace Course_WPF.ViewModels
             {
                 if (SelectedClient != null && SelectedClient.ImageClientId != 0)
                 {
-                    var json = await HttpTool.PostAsyncs("ImageClients", SelectedClient.ImageClientId, "Get_Client");
-                    Navigation.Instance.CurrentPage = new EditClientPage(SelectedClient);
+                    var json = await HttpTool.PostAsyncs("ImageClients", null , $"Get_Client/{SelectedClient.ImageClientId}");
+                    var imageClient = HttpTool.Deserialize<ImageClient>(json.Item2);
+                    Navigation.Instance.CurrentPage = new EditClientPage(SelectedClient, imageClient);
 
                     if (json.Item1 == HttpStatusCode.OK)
                     {
