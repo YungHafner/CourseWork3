@@ -9,9 +9,12 @@ namespace Course_WPF.ViewModels
     public class MainWindowVM : BaseVM
     {
         public CustomCommand SignUp { get; set; }
+        public CustomCommand RegistrationManager { get; set; }
 
         public string login { get; set; }
         public string password { get; set; }
+
+        public Navigation Navigation { get; set; }
 
         bool isLogin = false, isEditManager = false;
 
@@ -19,6 +22,12 @@ namespace Course_WPF.ViewModels
         bool magic = false;
         public MainWindowVM(MainWindow mainWindow)
         {
+            Navigation = Navigation.Instance;
+
+            RegistrationManager = new CustomCommand(() =>
+            {
+                Navigation.Instance.CurrentPage = new RegistrationPage();
+            });
             SignUp = new CustomCommand(async () =>
             {
                 if (magic)

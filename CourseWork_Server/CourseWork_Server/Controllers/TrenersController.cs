@@ -47,32 +47,19 @@ namespace CourseWork_Server.Controllers
             return trener;
         }
 
-        // PUT: api/Treners/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrener(int id, Trener trener)
-        {
-            if (id != trener.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(trener).State = EntityState.Modified;
-
+        
+        [HttpPost("EditTrener")]
+        public async Task<IActionResult> PutTrener(Trener trener)
+        {   
             try
             {
+                _context.Entry(trener).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!TrenerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+               return BadRequest(ex.Message);
+
             }
 
             return NoContent();

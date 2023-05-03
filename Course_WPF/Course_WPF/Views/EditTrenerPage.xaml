@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Course_WPF.Views" xmlns:viewmodels="clr-namespace:Course_WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:EditTrenerPageVM}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="340" d:DesignWidth="800"
       Title="EditTrenerPage">
 
     <Grid Background="White">
@@ -37,19 +37,19 @@
         <TextBlock Grid.Column="1" Grid.Row="5" Text="Описание" FontSize="20" VerticalAlignment="Bottom"/>
 
 
-        <TextBox Text="{Binding Path=Trener.TrenerName, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" FontSize="20"/>
-        <TextBox Text="{Binding Path=Trener.TrenerType, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" FontSize="20"/>
-        <TextBox Text="{Binding Path=Trener.TrenerDescription, Mode=TwoWay}" TextWrapping="Wrap" Grid.Row="6" Grid.Column="1"  Grid.RowSpan="3" FontSize="20"/>
+        <TextBox Text="{Binding Path=Trener.TrenerName, Mode=TwoWay}" Grid.Row="2" HorizontalAlignment="Left" Width="250" Grid.Column="1" FontSize="20"/>
+        <TextBox Text="{Binding Path=Trener.TrenerType, Mode=TwoWay}" Grid.Row="4" HorizontalAlignment="Left" Width="250" Grid.Column="1" FontSize="20"/>
+        <TextBox Text="{Binding Path=Trener.TrenerDescription, Mode=TwoWay}" HorizontalAlignment="Left" Width="250" TextWrapping="Wrap" Grid.Row="6" Grid.Column="1"  Grid.RowSpan="3" FontSize="20"/>
 
 
         <TextBlock Text="Зарплата" Grid.Row="1" Grid.Column="2" FontSize="20" VerticalAlignment="Bottom"/>
-        <TextBox Text="{Binding Path=Trener.TrenerSalary, Mode=TwoWay}"  Grid.Row="2" Grid.Column="2" FontSize="20"/>
+        <TextBox Text="{Binding Path=Trener.TrenerSalary, Mode=TwoWay}" HorizontalAlignment="Left" Width="250"  Grid.Row="2" Grid.Column="2" FontSize="20"/>
 
         <TextBlock Text="Логин" Grid.Row="3" Grid.Column="2" FontSize="20" VerticalAlignment="Bottom"/>
-        <TextBox Text="{Binding Path=Trener.TrenerLogin, Mode=TwoWay}" Grid.Row="4" Grid.Column="2" FontSize="20"/>
+        <TextBox Text="{Binding Path=Trener.TrenerLogin, Mode=TwoWay}" HorizontalAlignment="Left" Width="250" Grid.Row="4" Grid.Column="2" FontSize="20"/>
 
         <TextBlock Text="Пароль" Grid.Row="5" Grid.Column="2" FontSize="20" VerticalAlignment="Bottom"/>
-        <TextBox Text="{Binding Path=Trener.TrenerPassword, Mode=TwoWay}" Grid.Row="6" Grid.Column="2" FontSize="20"/>
+        <TextBox Text="{Binding Path=Trener.TrenerPassword, Mode=TwoWay}" HorizontalAlignment="Left" Width="250" Grid.Row="6" Grid.Column="2" FontSize="20"/>
 
 
         <Button Content="Выберите фотo" Command="{Binding SelectPhoto}" Foreground="White" FontSize="11" Grid.Row="9" VerticalAlignment="Top" Grid.Column="0" Height="20" Width="90" Background="#FFF5AC77"/>

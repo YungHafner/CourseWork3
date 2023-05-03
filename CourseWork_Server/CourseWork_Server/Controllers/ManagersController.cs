@@ -28,21 +28,23 @@ namespace CourseWork_Server.Controllers
         }
 
         // GET: api/Managers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Manager>> GetManager(int id)
+        [HttpPost("CreateRegistrationManager")]
+        public async Task<ActionResult<Manager>> GetManager(Manager manager)
         {
             if (_context.Managers == null)
             {
                 return NotFound();
             }
-            var manager = await _context.Managers.FindAsync(id);
+
+            _context.Managers.Add(manager);
+            await _context.SaveChangesAsync();
 
             if (manager == null)
             {
                 return NotFound();
             }
 
-            return manager;
+            return Ok();
         }
 
         [HttpPost("SearchOne")]

@@ -24,7 +24,6 @@ namespace Course_WPF.ViewModels
             Task.Run(async () =>
             {
                 Trener = trener;
-                //var json = await HttpTool.PostAsyncs("ImageTreners", null, $"GetTrenersImage/{Trener.ImageTrenerId}");
                 Image = img_trener.PhotoTrener;
             });
 
@@ -40,7 +39,7 @@ namespace Course_WPF.ViewModels
 
             Edit_Trener = new CustomCommand(async () =>
             {
-                //var json = await HttpTool.PostAsyncs("Treners", new Trener { } , "EditTrener");
+                var json = await HttpTool.PostAsyncs("Treners", trener , "EditTrener");
                 Navigation.Instance.CurrentPage = new TrenersListPage();
             });
         }

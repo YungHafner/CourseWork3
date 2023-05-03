@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(
     j => j.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
 );
-builder.Services.AddSingleton<DBFitnessClubContext>();
 
 
 builder.Services.Configure<JsonOptions>(options =>
@@ -17,7 +16,7 @@ builder.Services.Configure<JsonOptions>(options =>
     options.SerializerOptions.AllowTrailingCommas = true;
 });
 
-builder.Services.AddSingleton<CourseWork_Server.DBFitnessClubContext>();
+builder.Services.AddScoped<DBFitnessClubContext>();
 //Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
