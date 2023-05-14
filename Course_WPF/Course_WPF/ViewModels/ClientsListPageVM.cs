@@ -12,7 +12,10 @@ namespace Course_WPF.ViewModels
     public class ClientsListPageVM : BaseVM
     {
         private List<Client> clients;
-
+        
+        public string FullName { get; set; }
+        public string Lastname { get; set; }
+        public string Name { get; set; }  
         public string Family { get; set; }
         public DateTime Birthday { get; set; }
         public string PhoneNumber { get; set; }
@@ -29,7 +32,7 @@ namespace Course_WPF.ViewModels
 
         public ClientsListPageVM()
         {
-
+            
             EditClient = new CustomCommand(async () =>
             {
                 if (SelectedClient != null && SelectedClient.ImageClientId != 0)

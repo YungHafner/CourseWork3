@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Course_Lib.Models;
+using Course_Lib;
 
 namespace CourseWork_Server.Controllers
 {
@@ -62,7 +63,32 @@ namespace CourseWork_Server.Controllers
 
             }
 
-            return NoContent();
+            return Ok();
+        }
+
+        [HttpPost("AutorezationTrener")]
+        public async Task<ActionResult<Trener>> AutorezationTrener([FromBody] AuthData trenerauth)
+        {
+            try
+            {
+                if (_context.Treners == null)
+                {
+                    return NotFound();
+                }
+                Trener trener = null;
+                trener = _context.Treners.FirstOrDefault(a => a.TrenerLogin == trenerauth.Login
+                && a.TrenerPassword == trenerauth.Password);
+                if (trener == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                return BadRequest(ex);
+            }
+            return Ok();
+            //return CreatedAtAction("CreateTrener", new { id = trener.Id, trenerName = trener.TrenerName, trenerType = trener.TrenerType, trenerDescription = trener.TrenerDescription, trenerLogin = trener.TrenerLogin, trenerPassword = trener.TrenerPassword }, trener);
         }
 
         // POST: api/Treners

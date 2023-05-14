@@ -57,8 +57,10 @@ namespace CourseWork_Server.Controllers
             Manager manager = null;
             try
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 manager = await _context.Managers.FirstOrDefaultAsync(a => a.LoginManager == auth.Login
                 && a.PasswordManager == auth.Password);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (manager == null)
                 {
                     return NotFound();
@@ -66,8 +68,9 @@ namespace CourseWork_Server.Controllers
             }
             catch (Exception e) {
                 Console.WriteLine(e.Message);
+                return BadRequest();
             }
-
+           
             return manager;
         }
 

@@ -4,12 +4,16 @@ using Course_WPF.Views;
 using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Course_WPF.ViewModels
 {
     public class EditClientPageVM : BaseVM
     {
+
+        internal ImageClient _ReturnImageClient;
         private Client client;
         private ImageClient imageClient;
         private byte[] photoClient;
@@ -43,9 +47,19 @@ namespace Course_WPF.ViewModels
 
             Edit_Client = new CustomCommand(async () =>
             {
-                if (client.ImageClientId != 0)
+                if (client.ImageClientId != 0 && PhotoClient != null)
                 {
-                    var json2 = await HttpTool.PostAsyncs("ImageCliens", new ImageClient { Id = client.ImageClientId, PhotoClient = PhotoClient }, "EditPhoto");
+                    var json2 = await HttpTool.PostAsyncs("ImageClients", new ImageClient 
+                    { 
+                        Id = client.ImageClientId,
+                        PhotoClient = PhotoClient
+                    }, "EditPhoto");
+                    _ReturnImageClient = HttpTool.Deserialize<ImageClient>(json2.Item2);
+                    
+                }
+                else if(client.ImageClientId != 0 && PhotoClient == null) 
+                {
+                    
                 }
                 var json = await HttpTool.PostAsyncs("Clients", new Client
                 {
@@ -59,7 +73,8 @@ namespace Course_WPF.ViewModels
                     PassportSeria = Client.PassportSeria,
                     PassportNumber = Client.PassportNumber,
                     Vipclient = Client.Vipclient,
-                }, "UpdateClient");
+                    ImageClientId = _ReturnImageClient.Id,
+                }, "UpdateClient"); ;
 
                 Navigation.Instance.CurrentPage = new ClientsListPage();
             });

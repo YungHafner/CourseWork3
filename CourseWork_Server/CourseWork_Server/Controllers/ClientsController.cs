@@ -49,29 +49,21 @@ namespace CourseWork_Server.Controllers
         // PUT: api/Clients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("UpdateClient")]
-        public async Task<IActionResult> PutClient(Client client)
+        public async Task<IActionResult> PutClient([FromBody]Client client)
         {
-            if ( client.Id != null )
+            if(client.Id == 0) 
             {
-                return BadRequest();
+                return NotFound();
             }
-
-            _context.Entry(client).State = EntityState.Modified;
-
             try
             {
+                _context.Entry(client).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!ClientExists(client.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound(ex.Message);
+
             }
 
             return Ok();

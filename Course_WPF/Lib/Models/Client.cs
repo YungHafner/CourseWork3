@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Course_Lib.Models
 {
@@ -21,6 +20,18 @@ namespace Course_Lib.Models
         public int? PassportNumber { get; set; }
         public int ImageClientId { get; set; }
         public byte? Vipclient { get; set; }
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return $"{Family} {Name} {Lastname}";
+            }
+            set
+            {
+                
+            }
+        }
 
         public virtual ImageClient? ImageClient { get; set; }
         public virtual ICollection<Aboniment> Aboniments { get; set; }

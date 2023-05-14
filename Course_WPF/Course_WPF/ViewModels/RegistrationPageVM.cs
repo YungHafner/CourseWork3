@@ -1,6 +1,7 @@
 ﻿using Course_Lib;
 using Course_Lib.Models;
 using Course_WPF.Tools;
+using Course_WPF.Tools;
 
 namespace Course_WPF.ViewModels
 {
@@ -21,7 +22,8 @@ namespace Course_WPF.ViewModels
 
             RegistrationManager = new CustomCommand(async() => 
             {
-                var json = await HttpTool.PostAsyncs("Managers", new Manager { LoginManager = _Login, PasswordManager = _Password }, "CreateRegistrationManager");
+                var hashPass = HashedPassword.HashPassword(_Password);
+                var json = await HttpTool.PostAsyncs("Managers", new Manager { LoginManager = _Login, PasswordManager = hashPass }, "CreateRegistrationManager");
                 Navigation.Instance.CurrentPage = null;
             });
 

@@ -38,7 +38,7 @@
                         <Image Width="81" Height="112" Grid.RowSpan="2" Source="{Binding ImageClient.PhotoClient}"/>
 
                         <TextBlock Grid.Column="1" Width="130" Text="ФИО" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"></TextBlock>
-                        <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="1" Text="{Binding Family}" Width="200" VerticalAlignment="Top" FontSize="15" Height="30" />
+                        <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="1"  Text="{Binding FullName, NotifyOnSourceUpdated=True}" Width="200" VerticalAlignment="Top" FontSize="15" Height="30" />
 
                         <TextBlock Grid.Column="2" Width="130" Text="Дата рождения" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"></TextBlock>
                         <TextBox IsReadOnly="True" Grid.Row="1" Grid.Column="2" Text="{Binding Birthday, StringFormat='dd MMM yyyy'}" Width="100" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"/>

@@ -35,19 +35,17 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-
-
                         <TextBlock Grid.Column="1" Width="Auto" Text="Название" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"></TextBlock>
                         <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding NameAboniment}" Width="Auto" VerticalAlignment="Top" FontSize="15" Height="30" />
 
                         <TextBlock Grid.Column="2" Width="Auto" Text="Описание" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"></TextBlock>
-                        <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Description}" Width="130" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Description}" Width="130" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"/>
 
                         <TextBlock Grid.Column="3" Width="Auto" Text="Время тренировки (мин)" VerticalAlignment="Top"  FontSize="15" Margin="15 0 0 0" Height="30"></TextBlock>
-                        <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding TrainTimeMinutes}" Width="130" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding TrainTimeMinutes}" Width="Auto" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"/>
 
                         <TextBlock Grid.Column="4" Width="Auto" Text="Цена" VerticalAlignment="Top"  FontSize="15" Margin="15 0 0 0" Height="30"></TextBlock>
-                        <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding Cost}" Width="130" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"/>
+                        <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding Cost}" Width="Auto" VerticalAlignment="Top" FontSize="15" Margin="15 0 0 0" Height="30"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

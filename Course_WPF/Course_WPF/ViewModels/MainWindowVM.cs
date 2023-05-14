@@ -3,6 +3,10 @@ using Course_Lib.Models;
 using Course_WPF.Tools;
 using Course_WPF.Views;
 using System.Windows;
+using System.Security.Cryptography;
+using System.Text;
+using System;
+using System.CodeDom;
 
 namespace Course_WPF.ViewModels
 {
@@ -32,18 +36,51 @@ namespace Course_WPF.ViewModels
             {
                 if (magic)
                 { return; }
-                magic = true;
-                var json = await HttpTool.PostAsyncs("Managers", new AuthData { Login = login, Password = password }, "SearchOne");
-                var manager = HttpTool.Deserialize<Manager>(json.Item2);
 
-                if (manager.Id == 0)
+                magic = true;
+
+                var hashPass = HashedPassword.HashPassword(password);
+
+                if (hashPass == null )
                 {
-                    MessageBox.Show("Такого пользователя нет");
+                    MessageBox.Show("Не введен пароль");
+                    magic = false;
+                    return;
                 }
 
-                else
+                if (login != null)
                 {
-                    isLogin = true;
+                    var json = await HttpTool.PostAsyncs("Managers", new AuthData { Login = login, Password = hashPass }, "SearchOne");
+                    var json1 = await HttpTool.PostAsyncs("Treners", new AuthData { Login = login, Password = password }, "AutorezationTrener");
+                
+
+
+                    if (json.Item1 == System.Net.HttpStatusCode.OK)
+                    {
+                        MessageBox.Show($"Привет менеджер");
+                    }
+
+                    if (json.Item1 != System.Net.HttpStatusCode.OK)
+                    {
+                        if (json1.Item1 == System.Net.HttpStatusCode.OK)
+                        {
+                            isLogin = true;
+                            MessageBox.Show($"Привет тренер");
+
+                        }
+                        else
+                        {
+                        MessageBox.Show("Такого пользователя нет");
+                        magic = false;
+                        return;
+                        }
+
+                    }
+                    else
+                    {
+                        isLogin = true;
+                    }
+
                 }
 
                 if (isLogin)
@@ -52,10 +89,12 @@ namespace Course_WPF.ViewModels
                     MainMenu win = new MainMenu();
                     win.Show();
                 }
-                magic = false;
+                
 
                 mainWindow.Close();
             });
         }
+
+      
     }
 }

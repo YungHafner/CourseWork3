@@ -48,7 +48,7 @@ namespace CourseWork_Server.Controllers
         }
 
         [HttpPost("EditPhoto")]
-        public async Task<ActionResult<ImageClient>> PutImageClient(ImageClient imageClient)
+        public async Task<ActionResult<ImageClient>> PutImageClient([FromBody]ImageClient imageClient)
         {
             try
             {

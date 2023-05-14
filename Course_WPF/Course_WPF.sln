@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Course_WPF", "Course_WPF\Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseWork_Server", "..\CourseWork_Server\CourseWork_Server\CourseWork_Server.csproj", "{CCC400AD-B791-4A90-8873-07FEE128EE53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Lib\Lib.csproj", "{0FC3DE24-E9D7-4C6C-87D7-3C84C13677CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lib", "Lib\Lib.csproj", "{0FC3DE24-E9D7-4C6C-87D7-3C84C13677CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
